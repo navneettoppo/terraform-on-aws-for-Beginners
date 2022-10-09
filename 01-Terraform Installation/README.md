@@ -1,4 +1,4 @@
-# Terraform Installation (Linux, Windows and Mac)
+# Terraform & AWS cli Installation (Linux, Windows and Mac) 
 
 ## Linux Installation https://www.terraform.io/downloads
 - Ubuntu/Debian
@@ -6,18 +6,42 @@
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform
+
+# aws-cli installation
+sudo apt-get update
+sudo apt-get -y install awscli
+aws --version
+
+# configure awscli
+aws configure
 ```
 - Amazon Linux
 ```
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 sudo yum -y install terraform
+
+# aws-cli installation
+sudo yum update
+sudo yum -y install awscli
+aws --version
+
+# configure awscli
+aws configure
 ```
 - CentOS/RHEL
 ```
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 sudo yum -y install terraform
+
+# aws-cli installation
+sudo dnf install python3-pip
+sudo pip3 install awscli --upgrade --user
+aws --version
+
+# configure awscli
+aws configure
 ```
 
 ## Windows Installation https://www.terraform.io/downloads
@@ -25,6 +49,14 @@ sudo yum -y install terraform
 ```
 windows_386 https://releases.hashicorp.com/terraform/1.3.2/terraform_1.3.2_windows_386.zip
 windows_amd64 https://releases.hashicorp.com/terraform/1.3.2/terraform_1.3.2_windows_amd64.zip
+
+# awscli installation
+AWS CLI MSI installer for Windows (64-bit): https://s3.amazonaws.com/aws-cli/AWSCLI64PY3.msi
+AWS CLI MSI installer for Windows (32-bit): https://s3.amazonaws.com/aws-cli/AWSCLI32PY3.msi
+AWS CLI combined setup file for Windows: https://s3.amazonaws.com/aws-cli/AWSCLISetup.exe (includes both the 32-bit and 64-bit MSI installers, and automatically installs the correct version)
+
+# cmd/ powershell
+aws configure
 ```
 
 ## Mac Installation https://www.terraform.io/downloads
@@ -43,95 +75,14 @@ unzip terraform_0.14.3_darwin_amd64.zip
 echo $PATH
 mv terraform /usr/local/bin
 terraform version
-```
 
-## Step-01: Introduction
-- Install Terraform CLI
-- Install AWS CLI
-- Install VS Code Editor
-- Install HashiCorp Terraform plugin for VS Code
-
-
-## Step-02: MACOS: Terraform Install
-- [Download Terraform MAC](https://www.terraform.io/downloads.html)
-- [Install CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli)
-- Unzip the package
-```
-# Copy binary zip file to a folder
-mkdir /Users/<YOUR-USER>/Documents/terraform-install
-COPY Package to "terraform-install" folder
-
-# Unzip
-unzip <PACKAGE-NAME>
-unzip terraform_0.14.3_darwin_amd64.zip
-
-# Copy terraform binary to /usr/local/bin
-echo $PATH
-mv terraform /usr/local/bin
-
-# Verify Version
-terraform version
-
-# To Uninstall Terraform (NOT REQUIRED)
-rm -rf /usr/local/bin/terraform
-``` 
-
-## Step-03: MACOS: IDE for Terraform - VS Code Editor
-- [Microsoft Visual Studio Code Editor](https://code.visualstudio.com/download)
-- [Hashicorp Terraform Plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
-
-
-### Step-04: MACOS: Install AWS CLI
-- [AWS CLI Install](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-- [Install AWS CLI - MAC](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html#cliv2-mac-install-cmd)
-
-```
-# Install AWS CLI V2
+# awscli installation
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-sudo installer -pkg AWSCLIV2.pkg -target /
+sudo installer -pkg AWSCLIV2.pkg -target \
+                -target CurrentUserHomeDirectory \
+                -applyChoiceChangesXML choices.xml
+$ sudo ln -s /folder/installed/aws-cli/aws /usr/local/bin/aws
+$ sudo ln -s /folder/installed/aws-cli/aws_completer /usr/local/bin/aws_completer
 which aws
-aws --version
-
-# Uninstall AWS CLI V2 (NOT REQUIRED)
-which aws
-ls -l /usr/local/bin/aws
-sudo rm /usr/local/bin/aws
-sudo rm /usr/local/bin/aws_completer
-sudo rm -rf /usr/local/aws-cli
+aws configure
 ```
-
-
-## Step-05: MACOS: Configure AWS Credentials 
-- **Pre-requisite:** Should have AWS Account.
-  - [Create an AWS Account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)
-- Generate Security Credentials using AWS Management Console
-  - Go to Services -> IAM -> Users -> "Your-Admin-User" -> Security Credentials -> Create Access Key
-- Configure AWS credentials using SSH Terminal on your local desktop
-```
-# Configure AWS Credentials in command line
-$ aws configure
-AWS Access Key ID [None]: AKIASUF7DEFKSIAWMZ7K
-AWS Secret Access Key [None]: WL9G9Tl8lGm7w9t7B3NEDny1+w3N/K5F3HWtdFH/
-Default region name [None]: us-east-1
-Default output format [None]: json
-
-# Verify if we are able list S3 buckets
-aws s3 ls
-```
-- Verify the AWS Credentials Profile
-```
-cat $HOME/.aws/credentials 
-```
-
-## Step-06: WindowsOS: Terraform & AWS CLI Install
-- [Download Terraform](https://www.terraform.io/downloads.html)
-- [Install CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli)
-- Unzip the package
-- Create new folder `terraform-bins`
-- Copy the `terraform.exe` to a `terraform-bins`
-- Set PATH in windows 
-- Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-
-## Step-07: LinuxOS: Terraform & AWS CLI Install
-- [Download Terraform](https://www.terraform.io/downloads.html)
-- [Linux OS - Terraform Install](https://learn.hashicorp.com/tutorials/terraform/install-cli)
