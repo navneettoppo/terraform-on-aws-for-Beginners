@@ -2,12 +2,12 @@
 
 ## Step-01: Introduction
 - Understand basic Commands
-  - terraform init          # The terraform init command initializes a working directory containing configuration files and installs plugins for required providers.
-  - terraform fmt           # The terraform fmt command rewrites configuration files to a canonical format and style.
-  - terraform validate      # The terraform validate command validates the configuration files in a directory, referring only to the configuration and not accessing any remote services such as remote state, provider APIs, etc.
-  - terraform plan          # The terraform plan command creates an execution plan with a preview of the changes that Terraform will make to your infrastructure.
-  - terraform apply         # The terraform apply command executes the actions proposed in a Terraform plan to create, update, or destroy infrastructure.
-  - terraform destroy       # The terraform destroy command destroys all objects managed by a Terraform configuration.
+  - **terraform init** command initializes a working directory containing configuration files and installs plugins for required providers.
+  - **terraform fmt** command rewrites configuration files to a canonical format and style.
+  - **terraform validate** The terraform validate command validates the configuration files in a directory, referring only to the configuration and not accessing any remote services such as remote state, provider APIs, etc.
+  - **terraform plan** command creates an execution plan with a preview of the changes that Terraform will make to your infrastructure.
+  - **terraform apply** command executes the actions proposed in a Terraform plan to create, update, or destroy infrastructure.
+  - **terraform destroy** command destroys all objects managed by a Terraform configuration.
 
 ## Step-02: Review terraform manifest for EC2 Instance
 - **Pre-Conditions-1:** Ensure you have **default-vpc** in that respective region
